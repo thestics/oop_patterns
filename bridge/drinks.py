@@ -63,7 +63,8 @@ class Beverage:
     def prepare(self):
         type_name = self.drink_type.__class__.__name__
         additions = (
-            ", ".join(add.__class__.__name__ for add in self.drink_additions) or "none"
+            ", ".join(add.__class__.__name__ for add in self.drink_additions)
+            or "none"
         )
         consumption_type = self.consumption_type.__class__.__name__
         print(
@@ -94,7 +95,7 @@ black_coffe_with_milk_to_go = Coffe(
     sugar=1,
     drink_type=BlackDrink(),
     drink_additions=[MilkAddition()],
-    consumption_type=ConsumeOutdoors()
+    consumption_type=ConsumeOutdoors(),
 )
 
 black_coffe_with_milk_to_go.prepare()

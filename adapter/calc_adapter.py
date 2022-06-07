@@ -13,7 +13,10 @@ class VehicleCalcAdapter:
         corresponding proprietary vehicle type and vehicle calc"""
         if self.vehicle.model == "truck":
             return Truck(self.vehicle.age, self.vehicle.milage), TruckCalc
-        return Car(self.vehicle.age, self.vehicle.model, self.vehicle.dmg), CarCalc
+        return (
+            Car(self.vehicle.age, self.vehicle.model, self.vehicle.dmg),
+            CarCalc,
+        )
 
     def price(self):
         assert self.vehicle is not None

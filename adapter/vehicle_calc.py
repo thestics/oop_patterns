@@ -33,11 +33,20 @@ class VehicleCalc(abc.ABC):
 
 class CarCalc(VehicleCalc):
     avg_car_price = 6_000
-    car_price_map = {"ford": 3_000, "audi": 5_000, "bmw": 7_000, "tesla": 10_000}
+    car_price_map = {
+        "ford": 3_000,
+        "audi": 5_000,
+        "bmw": 7_000,
+        "tesla": 10_000,
+    }
 
     def calculate_price(self) -> str:
-        retail_price = self.car_price_map.get(self.vehicle.model, self.avg_car_price)
-        price = self.vehicle.damage * max(retail_price - 100 * self.vehicle.damage, 0)
+        retail_price = self.car_price_map.get(
+            self.vehicle.model, self.avg_car_price
+        )
+        price = self.vehicle.damage * max(
+            retail_price - 100 * self.vehicle.damage, 0
+        )
         return f"{price} USD"
 
 
@@ -46,7 +55,9 @@ class TruckCalc(VehicleCalc):
 
     def calculate_price(self) -> str:
         price = max(
-            self.avg_truck_price - 100 * self.vehicle.age - 0.01 * self.vehicle.milage,
+            self.avg_truck_price
+            - 100 * self.vehicle.age
+            - 0.01 * self.vehicle.milage,
             0,
         )
         return f"{price} USD"
