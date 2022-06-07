@@ -25,7 +25,7 @@ class VehicleCalc(abc.ABC):
 
     def set_vehicle(self, v: Vehicle):
         self.vehicle = v
-    
+
     @abc.abstractmethod
     def calculate_price(self) -> str:
         pass
@@ -37,7 +37,7 @@ class CarCalc(VehicleCalc):
 
     def calculate_price(self) -> str:
         retail_price = self.car_price_map.get(self.vehicle.model, self.avg_car_price)
-        price = self.vehicle.damage * max(retail_price - 100*self.vehicle.damage, 0)
+        price = self.vehicle.damage * max(retail_price - 100 * self.vehicle.damage, 0)
         return f"{price} USD"
 
 
@@ -45,5 +45,8 @@ class TruckCalc(VehicleCalc):
     avg_truck_price = 10_000
 
     def calculate_price(self) -> str:
-        price = max(self.avg_truck_price - 100*self.vehicle.age - 0.01*self.vehicle.milage, 0)
+        price = max(
+            self.avg_truck_price - 100 * self.vehicle.age - 0.01 * self.vehicle.milage,
+            0,
+        )
         return f"{price} USD"
