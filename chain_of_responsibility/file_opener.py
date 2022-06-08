@@ -9,7 +9,7 @@ from typing import Optional, Any
 class BaseHandler:
     def __init__(self, next_: Optional["BaseHandler"] = None):
         self.next = next_
-    
+
     @abc.abstractmethod
     def handle(self, obj: Any):
         pass
@@ -20,10 +20,10 @@ class HandlingError(Exception):
 
 
 class FileHandler(BaseHandler):
-    expected_ext = '__DEFAULT'
-    
+    expected_ext = "__DEFAULT"
+
     def handle(self, obj: str) -> int:
-        split = obj.split('.')
+        split = obj.split(".")
         ext = split[-1] if split else None
 
         if ext == self.expected_ext:
@@ -37,29 +37,28 @@ class FileHandler(BaseHandler):
 
 
 class ExeFileHandler(FileHandler):
-    expected_ext = 'exe'
+    expected_ext = "exe"
 
 
 class JpegFileHandler(FileHandler):
-    expected_ext = 'jpeg'
+    expected_ext = "jpeg"
 
 
 class BmpFileHandler(FileHandler):
-    expected_ext = 'bmp'
+    expected_ext = "bmp"
 
 
 def build_file_handler_chain() -> FileHandler:
     exe = ExeFileHandler()
     jpeg = JpegFileHandler(next_=exe)
     bmp = BmpFileHandler(next_=jpeg)
-    
+
     return bmp
 
-if __name__ == '__main__':
-    file_names = [
-        'foo.exe', 'bar.exe', 'foo.bmp', 'foo.bar'
-    ]
-    
+
+if __name__ == "__main__":
+    file_names = ["foo.exe", "bar.exe", "foo.bmp", "foo.bar"]
+
     h = build_file_handler_chain()
     for name in file_names:
         try:
